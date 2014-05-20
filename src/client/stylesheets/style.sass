@@ -1,0 +1,34 @@
+@import compass
+@import compass/reset
+*
+  box-sizing: border-box
+
+#app
+  position: relative
+
+
+#icon
+  $width: 21px
+  $height: 31px
+  position: absolute
+  z-index: 10
+  display: block
+  width: $width
+  height: $height
+  background-image: image-url("girls-white.png")
+  +experimental-value(background-image, image-set(image-url("girls-white.png") 1x, image-url("girls-white@2x.png") 2x))
+  background-size: 825px 467px
+  border-radius: 5px
+  border: 1px solid rgba(0,0,0,0.5)
+  +transition(0.5s)
+  +transition-timing-function(ease)
+  &.black
+    background-image: image-url("girls.png")
+    +experimental-value(background-image, image-set(image-url("girls.png") 1x, image-url("girls@2x.png") 2x))
+  @for $i from 0 through 9
+    @for $j from 0 through 7
+      &.icon#{$i}-#{$j}
+        background-position: $i*$width $j*$height + 4px
+
+#draw-area
+  background: #eee

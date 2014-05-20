@@ -1,0 +1,340 @@
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font: inherit;
+  font-size: 100%;
+  vertical-align: baseline;
+}
+
+html {
+  line-height: 1;
+}
+
+ol, ul {
+  list-style: none;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+caption, th, td {
+  text-align: left;
+  font-weight: normal;
+  vertical-align: middle;
+}
+
+q, blockquote {
+  quotes: none;
+}
+q:before, q:after, blockquote:before, blockquote:after {
+  content: "";
+  content: none;
+}
+
+a img {
+  border: none;
+}
+
+article, aside, details, figcaption, figure, footer, header, hgroup, main, menu, nav, section, summary {
+  display: block;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+#app {
+  position: relative;
+}
+
+#icon {
+  position: absolute;
+  z-index: 10;
+  display: block;
+  width: 21px;
+  height: 31px;
+  background-image: url('../images/girls-white.png');
+  background-image: -webkit-image-set(url('../images/girls-white.png') 1x, url('../images/girls-white@2x.png') 2x);
+  background-image: -moz-image-set(url('../images/girls-white.png') 1x, url('../images/girls-white@2x.png') 2x);
+  background-image: -ms-image-set(url('../images/girls-white.png') 1x, url('../images/girls-white@2x.png') 2x);
+  background-image: -o-image-set(url('../images/girls-white.png') 1x, url('../images/girls-white@2x.png') 2x);
+  background-image: image-set(url('../images/girls-white.png') 1x, url('../images/girls-white@2x.png') 2x);
+  background-size: 825px 467px;
+  border-radius: 5px;
+  border: 1px solid rgba(0, 0, 0, 0.5);
+  -moz-transition: 0.5s;
+  -o-transition: 0.5s;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+  -moz-transition-timing-function: ease;
+  -o-transition-timing-function: ease;
+  -webkit-transition-timing-function: ease;
+  transition-timing-function: ease;
+}
+#icon.black {
+  background-image: url('../images/girls.png');
+  background-image: -webkit-image-set(url('../images/girls.png') 1x, url('../images/girls@2x.png') 2x);
+  background-image: -moz-image-set(url('../images/girls.png') 1x, url('../images/girls@2x.png') 2x);
+  background-image: -ms-image-set(url('../images/girls.png') 1x, url('../images/girls@2x.png') 2x);
+  background-image: -o-image-set(url('../images/girls.png') 1x, url('../images/girls@2x.png') 2x);
+  background-image: image-set(url('../images/girls.png') 1x, url('../images/girls@2x.png') 2x);
+}
+#icon.icon0-0 {
+  background-position: 0px 4px;
+}
+#icon.icon0-1 {
+  background-position: 0px 35px;
+}
+#icon.icon0-2 {
+  background-position: 0px 66px;
+}
+#icon.icon0-3 {
+  background-position: 0px 97px;
+}
+#icon.icon0-4 {
+  background-position: 0px 128px;
+}
+#icon.icon0-5 {
+  background-position: 0px 159px;
+}
+#icon.icon0-6 {
+  background-position: 0px 190px;
+}
+#icon.icon0-7 {
+  background-position: 0px 221px;
+}
+#icon.icon1-0 {
+  background-position: 21px 4px;
+}
+#icon.icon1-1 {
+  background-position: 21px 35px;
+}
+#icon.icon1-2 {
+  background-position: 21px 66px;
+}
+#icon.icon1-3 {
+  background-position: 21px 97px;
+}
+#icon.icon1-4 {
+  background-position: 21px 128px;
+}
+#icon.icon1-5 {
+  background-position: 21px 159px;
+}
+#icon.icon1-6 {
+  background-position: 21px 190px;
+}
+#icon.icon1-7 {
+  background-position: 21px 221px;
+}
+#icon.icon2-0 {
+  background-position: 42px 4px;
+}
+#icon.icon2-1 {
+  background-position: 42px 35px;
+}
+#icon.icon2-2 {
+  background-position: 42px 66px;
+}
+#icon.icon2-3 {
+  background-position: 42px 97px;
+}
+#icon.icon2-4 {
+  background-position: 42px 128px;
+}
+#icon.icon2-5 {
+  background-position: 42px 159px;
+}
+#icon.icon2-6 {
+  background-position: 42px 190px;
+}
+#icon.icon2-7 {
+  background-position: 42px 221px;
+}
+#icon.icon3-0 {
+  background-position: 63px 4px;
+}
+#icon.icon3-1 {
+  background-position: 63px 35px;
+}
+#icon.icon3-2 {
+  background-position: 63px 66px;
+}
+#icon.icon3-3 {
+  background-position: 63px 97px;
+}
+#icon.icon3-4 {
+  background-position: 63px 128px;
+}
+#icon.icon3-5 {
+  background-position: 63px 159px;
+}
+#icon.icon3-6 {
+  background-position: 63px 190px;
+}
+#icon.icon3-7 {
+  background-position: 63px 221px;
+}
+#icon.icon4-0 {
+  background-position: 84px 4px;
+}
+#icon.icon4-1 {
+  background-position: 84px 35px;
+}
+#icon.icon4-2 {
+  background-position: 84px 66px;
+}
+#icon.icon4-3 {
+  background-position: 84px 97px;
+}
+#icon.icon4-4 {
+  background-position: 84px 128px;
+}
+#icon.icon4-5 {
+  background-position: 84px 159px;
+}
+#icon.icon4-6 {
+  background-position: 84px 190px;
+}
+#icon.icon4-7 {
+  background-position: 84px 221px;
+}
+#icon.icon5-0 {
+  background-position: 105px 4px;
+}
+#icon.icon5-1 {
+  background-position: 105px 35px;
+}
+#icon.icon5-2 {
+  background-position: 105px 66px;
+}
+#icon.icon5-3 {
+  background-position: 105px 97px;
+}
+#icon.icon5-4 {
+  background-position: 105px 128px;
+}
+#icon.icon5-5 {
+  background-position: 105px 159px;
+}
+#icon.icon5-6 {
+  background-position: 105px 190px;
+}
+#icon.icon5-7 {
+  background-position: 105px 221px;
+}
+#icon.icon6-0 {
+  background-position: 126px 4px;
+}
+#icon.icon6-1 {
+  background-position: 126px 35px;
+}
+#icon.icon6-2 {
+  background-position: 126px 66px;
+}
+#icon.icon6-3 {
+  background-position: 126px 97px;
+}
+#icon.icon6-4 {
+  background-position: 126px 128px;
+}
+#icon.icon6-5 {
+  background-position: 126px 159px;
+}
+#icon.icon6-6 {
+  background-position: 126px 190px;
+}
+#icon.icon6-7 {
+  background-position: 126px 221px;
+}
+#icon.icon7-0 {
+  background-position: 147px 4px;
+}
+#icon.icon7-1 {
+  background-position: 147px 35px;
+}
+#icon.icon7-2 {
+  background-position: 147px 66px;
+}
+#icon.icon7-3 {
+  background-position: 147px 97px;
+}
+#icon.icon7-4 {
+  background-position: 147px 128px;
+}
+#icon.icon7-5 {
+  background-position: 147px 159px;
+}
+#icon.icon7-6 {
+  background-position: 147px 190px;
+}
+#icon.icon7-7 {
+  background-position: 147px 221px;
+}
+#icon.icon8-0 {
+  background-position: 168px 4px;
+}
+#icon.icon8-1 {
+  background-position: 168px 35px;
+}
+#icon.icon8-2 {
+  background-position: 168px 66px;
+}
+#icon.icon8-3 {
+  background-position: 168px 97px;
+}
+#icon.icon8-4 {
+  background-position: 168px 128px;
+}
+#icon.icon8-5 {
+  background-position: 168px 159px;
+}
+#icon.icon8-6 {
+  background-position: 168px 190px;
+}
+#icon.icon8-7 {
+  background-position: 168px 221px;
+}
+#icon.icon9-0 {
+  background-position: 189px 4px;
+}
+#icon.icon9-1 {
+  background-position: 189px 35px;
+}
+#icon.icon9-2 {
+  background-position: 189px 66px;
+}
+#icon.icon9-3 {
+  background-position: 189px 97px;
+}
+#icon.icon9-4 {
+  background-position: 189px 128px;
+}
+#icon.icon9-5 {
+  background-position: 189px 159px;
+}
+#icon.icon9-6 {
+  background-position: 189px 190px;
+}
+#icon.icon9-7 {
+  background-position: 189px 221px;
+}
+
+#draw-area {
+  background: #eeeeee;
+}
