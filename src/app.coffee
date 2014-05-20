@@ -1,28 +1,20 @@
 express = require('express')
 app = express()
-http = require('http')
-server = http.createServer(app)
-
+server = require('http').createServer(app)
+io = require('socket.io')(server)
 app.use express.static('client')
-app.set 'port', process.env.PORT || 3000
-server.listen  app.get 'port'
+server.listen process.env.PORT || 3000
 
-io = require('socket.io').listen(server)
-
-redis = require('socket.io/lib/stores/redis')
-redisConf =
-  host: 'localhost', port: 6379
-
-io.set 'store', new redis
-  redisPub    : redisConf,
-  redisSub    : redisConf,
-  redisClient : redisConf,
+redis = require('redis-url').connect(process.env.REDISTOGO_URL || "redis://localhost:6379")
 
 #
 # app
 #
 
-io.sockets.on 'connection', (socket) ->
-  socket.emit 'news',hello: 'world'
-  socket.on 'my other event', (data)->
+io.on 'connection', (client)->
+  client.on 'draw', (data)->
     console.log data
+    io.emit 'draw',
+      mode: data.mode
+      point: data.point
+      color: data.color

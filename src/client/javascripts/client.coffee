@@ -1,8 +1,5 @@
 _.mixin(_.str.exports())
 
-#
-# socket.io
-#
 socket = io.connect("http://" + location.host)
 
 #
@@ -15,12 +12,12 @@ Vue.component 'draw',
   <canvas id="draw-area" v-component="draw"
     width="800" height="800"
     style="width: 400px; height: 400px;"
-    v-on="    mousedown : startDraw,
-              mouseup   : endDraw,
-              mousemove : draw,
-              touchstart: startDraw,
-              touchend  : endDraw,
-              touchmove : draw
+    v-on="    mousedown : down,
+              mousemove : move,
+              mouseup   : up,
+              touchstart: down,
+              touchmove : move,
+              touchend  : up
     "></canvas>
   '''
   replace: true
@@ -30,40 +27,59 @@ Vue.component 'draw',
       x: 0
       y: 0
   methods:
+    #
+    # get point position
+    #
     point: (e)->
       x: 2*e.pageX - @$el.offsetTop
       y: 2*e.pageY - @$el.offsetLeft
+    #
+    # undo
+    #
     undo: ->
       ctx = @$el.getContext '2d'
       ctx.putImageData prevImage, 0,0
-    draw: (e)->
-      if @drawing
-        ctx = @$el.getContext '2d'
-        ctx.lineWidth = 6
-        ctx.strokeStyle = @$parent.color
-        ctx.fillStyle = @$parent.color
-        ctx.beginPath()
-        ctx.lineCap = "round"
-        ctx.moveTo @prev.x, @prev.y
-        ctx.lineTo @point(e).x, @point(e).y
-        ctx.stroke()
-        ctx.closePath()
-        @prev = @point(e)
-    startDraw: (e)->
+    #
+    # event methods
+    #
+    down: (e)->
       @drawing = true
-      @prev = @point(e)
+      socket.emit "draw", {mode: "down", point: @point(e), color: @$parent.color}
+    move: (e)->
+      if @drawing
+        socket.emit "draw", {mode: "move", point: @point(e), color: @$parent.color}
+    up: (e)->
+      @drawing = false
+      socket.emit "draw", mode: "up"
+    #
+    # draw methods
+    #
+    draw: (point,color)->
+      ctx = @$el.getContext '2d'
+      ctx.lineWidth = 6
+      ctx.strokeStyle = color
+      ctx.fillStyle = color
+      ctx.beginPath()
+      ctx.lineCap = "round"
+      ctx.moveTo @prev.x, @prev.y
+      ctx.lineTo point.x, point.y
+      ctx.stroke()
+      ctx.closePath()
+      @prev = point
+    drawstart: (point)->
+      console.log point
+      @prev = point
       ctx = @$el.getContext '2d'
       prevImage = ctx.getImageData 0,0, @$el.width, @$el.height
-    endDraw: ->
-      @drawing = false
 
-new Vue
+app = new Vue
   el: "#app"
   data:
     color: "#d00"
     icon:
       x: 300
       y: -300
+      class: "1-3"
   methods:
     iconMove: (e)->
       d = @icon.x + @icon.y - e.pageX - e.pageY
@@ -73,3 +89,10 @@ new Vue
         @icon.y = e.pageY - 20
     undoFire: ->
       @$.drawArea.undo()
+
+socket.on 'draw', (data)->
+  switch data.mode
+    when "down"
+      app.$.drawArea.drawstart data.point
+    when "move"
+      app.$.drawArea.draw data.point, data.color

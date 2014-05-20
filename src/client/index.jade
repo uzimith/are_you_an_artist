@@ -4,4 +4,4 @@ block content
   #app(v-on="mousemove : iconMove, touchemove : iconMove")
     canvas#draw-area(v-component="draw" v-ref="drawArea")
     span(v-on="click: undoFire, touchend: undoFire") Undo
-    span#icon.icon1-1(v-style="left: icon.x+'px', top: icon.y+'px', background-color: color") {{icon.text}}
+    span#icon(class="icon{{icon.class}}" v-style="left: icon.x+'px', top: icon.y+'px', background-color: color") {{icon.text}}
