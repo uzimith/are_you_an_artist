@@ -10,7 +10,6 @@ redis = require('redis-url').connect(process.env.REDISTOGO_URL || "redis://local
 #
 # app
 #
-
 io.on 'connection', (client)->
   client.on 'draw', (data)->
     console.log data

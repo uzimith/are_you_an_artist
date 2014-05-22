@@ -1,26 +1,26 @@
 gulp = require("gulp")
 # slim = require("gulp-slim")
-jade = require('gulp-jade')
+jade = require("gulp-jade")
 coffee = require("gulp-coffee")
 uglify = require("gulp-uglify")
 compass = require("gulp-compass")
 csso = require("gulp-csso")
 clean = require("gulp-clean")
-livereload = require('gulp-livereload')
-path = require('path')
-plumber = require('gulp-plumber')
+livereload = require("gulp-livereload")
+path = require("path")
+plumber = require("gulp-plumber")
 
 #
 # template
 #
-gulp.task 'template', ->
+gulp.task "template", ->
   gulp.src [
-    'src/client/*.jade'
-    '!src/client/layout.jade'
+    "src/client/*.jade"
+    "!src/client/layout.jade"
   ]
   .pipe plumber()
   .pipe jade pretty: true
-  .pipe gulp.dest 'tmp/client'
+  .pipe gulp.dest "tmp/client"
   .pipe livereload()
 
 #
@@ -52,12 +52,14 @@ gulp.task "js", ->
 gulp.task "compass", ->
   gulp.src("src/client/stylesheets/**/*.sass")
     .pipe plumber()
-    .pipe(compass(
-      project: path.join(__dirname, 'src/client')
+    .pipe compass(
       comments: false
-      sass: 'stylesheets'
-    ))
-    .pipe(gulp.dest('tmp/client/stylesheets'))
+      sass: "src/client/stylesheets"
+      css: "tmp/client/stylesheets"
+      image: "tmp/client/images"
+      # require: ['susy']
+    )
+    .pipe(gulp.dest("tmp/client/stylesheets"))
     .pipe livereload()
 
 gulp.task "css", ->
@@ -98,21 +100,18 @@ gulp.task  "server", ->
     .pipe coffee()
     .pipe gulp.dest("tmp/")
     .pipe livereload()
+
 #
 # command
 #
 gulp.task "watch", ->
-  gulp.watch "src/client/javascripts/**", (event) ->
-    gulp.run "coffee"
-  gulp.watch "src/client/stylesheets/**", (event) ->
-    gulp.run "compass"
-  gulp.watch "src/client/*", (event) ->
-    gulp.run "template"
-  gulp.watch "src/*", (event) ->
-    gulp.run "server"
+  gulp.watch "src/client/javascripts/**", ["coffee"]
+  gulp.watch "src/client/stylesheets/**", ["compass"]
+  gulp.watch "src/client/*", ["template"]
+  gulp.watch "src/*", ["server"]
 
-gulp.task "default", ->
-  gulp.run "template" , "coffee", "js", "compass", "css", "copy", "server"
+
+gulp.task "default", ["template" , "coffee", "js", "compass", "css", "copy", "server", "watch"]
 
 gulp.task "clean", ->
   gulp.src("build").pipe clean()

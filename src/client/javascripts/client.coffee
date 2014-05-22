@@ -9,9 +9,9 @@ prevImage = null
 
 Vue.component 'draw',
   template: '''
-  <canvas id="draw-area" v-component="draw"
-    width="800" height="800"
-    style="width: 400px; height: 400px;"
+  <canvas id="board" v-component="draw"
+    width="900" height="640"
+    style="width: 450px; height: 320px;"
     v-on="    mousedown : down,
               mousemove : move,
               mouseup   : up,
@@ -31,8 +31,8 @@ Vue.component 'draw',
     # get point position
     #
     point: (e)->
-      x: 2*e.pageX - @$el.offsetTop
-      y: 2*e.pageY - @$el.offsetLeft
+      x: 2*(e.pageX - @$el.offsetLeft)
+      y: 2*(e.pageY - @$el.offsetTop)
     #
     # undo
     #
