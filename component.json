@@ -7,7 +7,9 @@
   "dependencies": {
     "yyx990803/vue": "*",
     "jashkenas/underscore": "*",
-    "visionmedia/superagent": "*"
+    "visionmedia/superagent": "*",
+    "ianstormtaylor/router": "*",
+    "vuejs/vue-touch": "*"
   },
   "main": "tmp/client/javascripts/main.js",
   "scripts": [
@@ -15,7 +17,9 @@
     "tmp/client/javascripts/client.js",
     "tmp/client/javascripts/reset.js"
   ],
-  "paths": ["components"],
+  "paths": [
+    "components"
+  ],
   "development": {},
   "license": "MIT"
 }

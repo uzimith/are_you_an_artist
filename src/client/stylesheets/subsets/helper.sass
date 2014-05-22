@@ -1,0 +1,19 @@
+@mixin retina-image($name, $ext)
+  background-image: image-url($name + "." + $ext)
+  +experimental-value(background-image, image-set(image-url($name + "." + $ext) 1x, image-url($name + "@2x." + $ext) 2x))
+
+@mixin gradient-top-lighten($color: #666, $lighten: 5%)
+  background: $color
+  +filter-gradient(lighten($color, $lighten), $color, vertical)
+  +background-image(linear-gradient(lighten($color, $lighten) 0%, $color 100%))
+
+@mixin box-centerling($width, $height)
+  display: block
+  position: absolute
+  top: 50%
+  left: 50%
+  margin-top: - $height / 2
+  margin-left: - $width / 2
+  width: $width
+  height: $height
+

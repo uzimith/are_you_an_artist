@@ -1,11 +1,50 @@
 @import compass
 @import compass/reset
+@import subsets/helper
+@import susy
+@import breakpoint
+@import sassy-buttons
+
+// breakpoint
+$nontarget: max-width 320px
+$disktop: 570px
+
 *
   box-sizing: border-box
+
+$main-color    : #222
+$seccond-color : #000
+$accent-color  : #000
+
+
+
+[v-cloak]
+  display: none
 
 html,body,#app
   width: 100%
   height: 100%
+  background-image: image-url("food.png")
+
+#header
+  display: none
+  +breakpoint($disktop)
+    display: block
+    z-index: 1
+    position: fixed
+    top: 0
+    left: 0
+    background: #000
+    +gradient-top-lighten($main-color)
+    width: 100%
+    height: 32px
+    h1
+      color: #fff
+      font-family: Helvetica
+      height: 32px
+      line-height: 32px
+      margin-left: 10px
+      // text-shadow: 1px -1px 0 rgba(255,255,255,0.5)
 
 #app
   position: relative
@@ -19,32 +58,74 @@ html,body,#app
   display: block
   width: $width
   height: $height
-  background-image: image-url("girls-white.png")
-  +experimental-value(background-image, image-set(image-url("girls-white.png") 1x, image-url("girls-white@2x.png") 2x))
+  +retina-image("girls-white", "png")
   background-size: 825px 467px
   border-radius: 5px
   border: 1px solid rgba(0,0,0,0.5)
   +transition(0.5s)
   +transition-timing-function(ease)
   &.black
-    background-image: image-url("girls.png")
-    +experimental-value(background-image, image-set(image-url("girls.png") 1x, image-url("girls@2x.png") 2x))
+    +retina-image("girls", "png")
   @for $i from 0 through 9
     @for $j from 0 through 7
       &.icon#{$i}-#{$j}
         background-position: $i*$width $j*$height + 4px
 
 #board
-  $width: 450px
-  $height: 320px
-  display: block
-  position: absolute
-  top: 50%
-  left: 50%
-  margin-top: - $height / 2
-  margin-left: - $width / 2
-  width: $width
-  height: $height
-  // background: #F7F7F7
-  background: #aaa
+  +box-centerling(450px, 320px)
+  border: 10px solid transparent
+  border-image: image-url("crossword.png") 10 10 round
+  background-image: image-url("sprinkles.png")
+  box-shadow: 0 0 1px 0 rgba(0, 0, 0, 0.3), 0 0 1px 0 rgba(0, 0, 0, 0.3) inset
+
+.export
+  display: none
+  +breakpoint($disktop)
+    z-index: 2
+    position: absolute
+    right: 10px
+    top: 35px
+    +sassy-button("glass", 5px, 14px)
+
+#config
+  background: rgba(0,0,0, 0.5)
+  z-index: 10
+  +box-centerling(460px, 330px)
   border-radius: 5px
+  +transition
+  opacity: 0.8
+  padding: 10px
+  &.v-enter, &.v-leave
+    opacity: 0
+  h2
+    font-size: 120%
+    color: white
+    text-shadow: 1px 1px 0 rgba(255,255,255, 0.2)
+  .submit
+    position: absolute
+    right: 10px
+    bottom: 10px
+    opacity: 0.8
+    +sassy-button("flat")
+
+
+//
+// nontarget
+//
+#app
+  +breakpoint($nontarget)
+    display: none
+#nontarget
+  +transition
+  opacity: 0
+  +breakpoint($nontarget)
+    opacity: 1
+    display: block
+    width: 100%
+    height: 100%
+  p
+    text-align: center
+    color: white
+    font-size: 200%
+    position: absolute
+    top: 50%

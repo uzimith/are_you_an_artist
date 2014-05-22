@@ -1,6 +1,14 @@
 extends layout
 
 block content
+  #header
+    h1 Are You an Artist
   #app(v-on="mousemove : iconMove, touchemove : iconMove")
     canvas(v-component="draw" v-ref="drawArea")
     span#icon(class="icon{{icon.class}}" v-style="left: icon.x+'px', top: icon.y+'px', background-color: color") {{icon.text}}
+    a.export(v-touch="tap: exportFire") Export
+    section#config(v-if='show' v-transition)
+      h2 Config
+      a.submit(v-touch="tap: show = !show") End
+  #nontarget
+    p Please hold iPhone with landscape.

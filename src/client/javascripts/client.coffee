@@ -9,12 +9,9 @@ Vue.component 'draw',
   template: '''
   <canvas id="board" v-component="draw"
     width="900" height="640"
-    v-on="    mousedown : down,
-              mousemove : move,
-              mouseup   : up,
-              touchstart: down,
-              touchmove : move,
-              touchend  : up
+    v-touch="touch   : down,
+             drag    : move,
+             release : up,
     "></canvas>
   '''
   replace: true
@@ -28,8 +25,8 @@ Vue.component 'draw',
     # get point position
     #
     point: (e)->
-      x: 2*(e.pageX - @$el.offsetLeft)
-      y: 2*(e.pageY - @$el.offsetTop)
+      x: 2*(e.gesture.center.pageX - @$el.offsetLeft)
+      y: 2*(e.gesture.center.pageY - @$el.offsetTop)
     #
     # undo
     #
@@ -64,7 +61,6 @@ Vue.component 'draw',
       ctx.closePath()
       @prev = point
     drawstart: (point)->
-      console.log point
       @prev = point
       ctx = @$el.getContext '2d'
       prevImage = ctx.getImageData 0,0, @$el.width, @$el.height
@@ -77,6 +73,7 @@ app = new Vue
       x: 300
       y: -300
       class: "1-3"
+    show: true
   methods:
     iconMove: (e)->
       d = @icon.x + @icon.y - e.pageX - e.pageY
@@ -86,6 +83,9 @@ app = new Vue
         @icon.y = e.pageY - 20
     undoFire: ->
       @$.drawArea.undo()
+    exportFire: ->
+      png = @$.drawArea.$el.toDataURL()
+      console.log png
 
 socket.on 'draw', (data)->
   switch data.mode
