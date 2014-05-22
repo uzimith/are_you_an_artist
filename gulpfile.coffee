@@ -74,19 +74,14 @@ gulp.task "css", ->
 #
 gulp.task "copy", ->
   gulp.src("tmp/client/images/**")
-    .pipe plumber()
     .pipe gulp.dest("build/client/images")
   gulp.src("tmp/*.js")
-    .pipe plumber()
-    .pipe uglify()
     .pipe gulp.dest("build/")
   gulp.src("tmp/client/*.html")
-    .pipe plumber()
     .pipe gulp.dest("build/client/")
-  gulp.src(["tmp/client/build/build.js"])
-    .pipe plumber()
+  gulp.src(["tmp/client/build/**"])
     .pipe uglify()
-    .pipe gulp.dest("build/client/build/build.js")
+    .pipe gulp.dest("build/client/build/")
 
 #
 # server
