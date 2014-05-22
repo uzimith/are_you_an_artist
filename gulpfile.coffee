@@ -58,7 +58,6 @@ gulp.task "compass", ->
     .pipe livereload()
 
 gulp.task "css", ->
-  # Minify and copy all JavaScript (except vendor scripts)
   gulp.src([
     "tmp/client/stylesheets/**/*.css"
     "!tmp/client/stylesheets/vendor/**"
@@ -66,7 +65,6 @@ gulp.task "css", ->
     .pipe plumber()
     .pipe csso()
     .pipe gulp.dest("build/client/stylesheets")
-  # Copy vendor files
   gulp.src("tmp/client/stylesheets/vendor/**")
     .pipe plumber()
     .pipe gulp.dest("build/client/stylesheets/vendor")
@@ -74,7 +72,7 @@ gulp.task "css", ->
 #
 # static
 #
-gulp.task "build", ->
+gulp.task "copy", ->
   gulp.src("tmp/client/images/**")
     .pipe plumber()
     .pipe gulp.dest("build/client/images")
