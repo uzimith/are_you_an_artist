@@ -68,13 +68,24 @@ Vue.component 'draw',
 app = new Vue
   el: "#app"
   data:
-    color: "#d00"
+    color: "#000"
+    colors: [
+      "#6499fa"
+      "#fa7a64"
+      "#fac564"
+      "#e4fa64"
+      "#fa6499"
+      "#fac564"
+      "#64fac5"
+    ]
     icon:
       x: 300
       y: -300
       class: "1-3"
     show: true
   methods:
+    selectColor: (color)->
+      @color = color
     iconMove: (e)->
       d = @icon.x + @icon.y - e.pageX - e.pageY
       # lazy tracking

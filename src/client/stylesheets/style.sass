@@ -87,6 +87,9 @@ html,body,#app
     top: 35px
     +sassy-button("glass", 5px, 14px)
 
+//
+// config
+//
 #config
   background: rgba(0,0,0, 0.5)
   z-index: 10
@@ -99,7 +102,7 @@ html,body,#app
     opacity: 0
   h2
     font-size: 120%
-    color: white
+    color: #000
     text-shadow: 1px 1px 0 rgba(255,255,255, 0.2)
   .submit
     position: absolute
@@ -107,6 +110,16 @@ html,body,#app
     bottom: 10px
     opacity: 0.8
     +sassy-button("flat")
+  #color-panel
+    +clearfix
+    .color
+      display: block
+      width: 30px
+      height: 30px
+      float: left
+      border: 3px solid #ddd
+      border-radius: 3px
+      margin: 5px
 
 
 //

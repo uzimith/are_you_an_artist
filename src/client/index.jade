@@ -9,6 +9,8 @@ block content
     a.export(v-touch="tap: exportFire") Export
     section#config(v-if='show' v-transition)
       h2 Config
+      #color-panel
+        .color(v-repeat="color: colors" v-style="background: color" v-touch="tap: selectColor(color)")
       a.submit(v-touch="tap: show = !show") End
   #nontarget
     p Please hold iPhone with landscape.
