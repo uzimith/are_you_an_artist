@@ -1,17 +1,14 @@
-_.mixin(_.str.exports())
+Vue = require 'vue'
 
 socket = io.connect("http://" + location.host)
 
-#
-# drawing
-#
+console.log "client"
 prevImage = null
 
 Vue.component 'draw',
   template: '''
   <canvas id="board" v-component="draw"
     width="900" height="640"
-    style="width: 450px; height: 320px;"
     v-on="    mousedown : down,
               mousemove : move,
               mouseup   : up,

@@ -1,0 +1,21 @@
+{
+  "name": "ayaa",
+  "repo": "uzimy/ayaa",
+  "description": "game",
+  "version": "0.0.1",
+  "keywords": [],
+  "dependencies": {
+    "yyx990803/vue": "*",
+    "jashkenas/underscore": "*",
+    "visionmedia/superagent": "*"
+  },
+  "main": "tmp/client/javascripts/main.js",
+  "scripts": [
+    "tmp/client/javascripts/main.js",
+    "tmp/client/javascripts/client.js",
+    "tmp/client/javascripts/reset.js"
+  ],
+  "paths": ["components"],
+  "development": {},
+  "license": "MIT"
+}

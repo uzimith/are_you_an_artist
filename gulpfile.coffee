@@ -1,5 +1,7 @@
+Q = require('q')
+
 gulp = require("gulp")
-# slim = require("gulp-slim")
+component = require('gulp-component')
 jade = require("gulp-jade")
 coffee = require("gulp-coffee")
 uglify = require("gulp-uglify")
@@ -7,7 +9,6 @@ compass = require("gulp-compass")
 csso = require("gulp-csso")
 clean = require("gulp-clean")
 livereload = require("gulp-livereload")
-path = require("path")
 plumber = require("gulp-plumber")
 
 #
@@ -29,22 +30,16 @@ gulp.task "template", ->
 gulp.task "coffee", ->
   gulp.src("src/client/javascripts/**/*.coffee")
     .pipe plumber()
-    .pipe coffee()
+    .pipe coffee bare: true
     .pipe gulp.dest("tmp/client/javascripts")
+gulp.task "component", ["coffee"], ->
+  deferred = Q.defer()
+  gulp.src 'component.json'
+    .pipe component standalone: true
+    .pipe gulp.dest('tmp/client/build')
     .pipe livereload()
-
-gulp.task "js", ->
-  gulp.src([
-    "tmp/client/javascripts/**/*.js"
-    "!tmp/client/javascripts/components/**/*.js"
-  ])
-    .pipe plumber()
-    .pipe uglify()
-    .pipe gulp.dest("build/client/javascripts")
-  # Copy vendor files
-  gulp.src("tmp/client/javascripts/components/**/*.js")
-    .pipe plumber()
-    .pipe gulp.dest("build/client/javascripts/components")
+  deferred.resolve()
+  deferred.promise
 
 #
 # css
@@ -79,7 +74,7 @@ gulp.task "css", ->
 #
 # static
 #
-gulp.task "copy", ->
+gulp.task "build", ->
   gulp.src("tmp/client/images/**")
     .pipe plumber()
     .pipe gulp.dest("build/client/images")
@@ -90,6 +85,10 @@ gulp.task "copy", ->
   gulp.src("tmp/client/*.html")
     .pipe plumber()
     .pipe gulp.dest("build/client/")
+  gulp.src(["tmp/client/build/build.js"])
+    .pipe plumber()
+    .pipe uglify()
+    .pipe gulp.dest("build/client/build/build.js")
 
 #
 # server
@@ -97,7 +96,7 @@ gulp.task "copy", ->
 gulp.task  "server", ->
   gulp.src("src/*.coffee")
     .pipe plumber()
-    .pipe coffee()
+    .pipe coffee bare: true
     .pipe gulp.dest("tmp/")
     .pipe livereload()
 
@@ -105,13 +104,13 @@ gulp.task  "server", ->
 # command
 #
 gulp.task "watch", ->
-  gulp.watch "src/client/javascripts/**", ["coffee"]
+  gulp.watch "src/client/javascripts/**", ["component"]
   gulp.watch "src/client/stylesheets/**", ["compass"]
   gulp.watch "src/client/*", ["template"]
   gulp.watch "src/*", ["server"]
 
-
-gulp.task "default", ["template" , "coffee", "js", "compass", "css", "copy", "server", "watch"]
+gulp.task "default", ["template" , "component", "compass", "css", "server", "watch"]
+gulp.task "build", ["template" , "component", "compass", "css", "server", "copy"]
 
 gulp.task "clean", ->
   gulp.src("build").pipe clean()

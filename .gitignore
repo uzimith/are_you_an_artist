@@ -24,8 +24,10 @@ Temporary Items
 
 /build/
 /node_modules/
+components
 .sass-cache
 tmp/*.js
+tmp/client/build
 tmp/client/javascripts
 tmp/client/stylesheets
 tmp/client/*.html
