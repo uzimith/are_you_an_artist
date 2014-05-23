@@ -1,0 +1,12 @@
+script#color-palette-template(type="text/x-template")
+  #color-palette.palette
+    h3 Color
+    color-frame(v-repeat="colors" v-touch="tap: selectColor($value)")
+script#charactor-palette-template(type="text/x-template")
+  #charactor-palette.palette
+    h3 Charactor
+    select(v-model="x")
+      option(v-repeat="xrange") {{$value}}
+    select(v-model="y")
+      option(v-repeat="yrange") {{$value}}
+

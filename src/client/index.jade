@@ -10,8 +10,9 @@ block content
   section#config
     .panel(v-if='show' v-transition)
       h2 Config
-      #color-panel
-        color-palette(v-repeat="colors" v-touch="tap: selectColor($value)")
+      color-palette
+      charactor-palette
       a.submit(v-touch="tap: show = !show") End
   #nontarget
     p Please hold iPhone with landscape.
+  include config

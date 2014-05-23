@@ -96,22 +96,27 @@ html,body,#app
     font-size: 120%
     color: #000
     text-shadow: 1px 1px 0 rgba(255,255,255, 0.2)
+  h3
+    margin-left: 5px
+    margin-bottom: 5px
   .submit
     position: absolute
     right: 15px
     bottom: 30px
     opacity: 0.8
     +sassy-button("flat")
-  #color-panel
+  .palette
+    margin-bottom: 20px
+  #color-palette
     +clearfix
     .color
+      margin: 0 5px
       display: block
       width: 30px
       height: 30px
       float: left
       border: 3px solid #ddd
       border-radius: 3px
-      margin: 5px
 
 .panel
   background: rgba(0,0,0, 0.5)
