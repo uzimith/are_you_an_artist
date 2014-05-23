@@ -24,6 +24,7 @@ Temporary Items
 
 /build/
 /node_modules/
+/images
 components
 .sass-cache
 tmp/*.js

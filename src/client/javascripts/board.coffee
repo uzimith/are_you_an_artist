@@ -1,11 +1,9 @@
 Vue = require 'vue'
-
 socket = io.connect("http://" + location.host)
 
-console.log "client"
 prevImage = null
 
-Vue.component 'draw',
+Vue.component 'draw-component',
   template: '''
   <canvas id="board" v-component="draw"
     width="900" height="640"
@@ -64,43 +62,3 @@ Vue.component 'draw',
       @prev = point
       ctx = @$el.getContext '2d'
       prevImage = ctx.getImageData 0,0, @$el.width, @$el.height
-
-app = new Vue
-  el: "#app"
-  data:
-    color: "#000"
-    colors: [
-      "#6499fa"
-      "#fa7a64"
-      "#fac564"
-      "#e4fa64"
-      "#fa6499"
-      "#fac564"
-      "#64fac5"
-    ]
-    icon:
-      x: 300
-      y: -300
-      class: "1-3"
-    show: true
-  methods:
-    selectColor: (color)->
-      @color = color
-    iconMove: (e)->
-      d = @icon.x + @icon.y - e.pageX - e.pageY
-      # lazy tracking
-      if d > 30 || d < -30
-        @icon.x = e.pageX + 20
-        @icon.y = e.pageY - 20
-    undoFire: ->
-      @$.drawArea.undo()
-    exportFire: ->
-      png = @$.drawArea.$el.toDataURL()
-      console.log png
-
-socket.on 'draw', (data)->
-  switch data.mode
-    when "down"
-      app.$.drawArea.drawstart data.point
-    when "move"
-      app.$.drawArea.draw data.point, data.color

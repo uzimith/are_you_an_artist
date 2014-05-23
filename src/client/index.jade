@@ -3,14 +3,15 @@ extends layout
 block content
   #header
     h1 Are You an Artist
-  #app(v-on="mousemove : iconMove, touchemove : iconMove")
-    canvas(v-component="draw" v-ref="drawArea")
-    span#icon(class="icon{{icon.class}}" v-style="left: icon.x+'px', top: icon.y+'px', background-color: color") {{icon.text}}
+  section#app(v-on="mousemove : move, touchemove : move")
+    draw-component(v-ref="board")
+    icon-component
     a.export(v-touch="tap: exportFire") Export
-    section#config(v-if='show' v-transition)
+  section#config
+    .panel(v-if='show' v-transition)
       h2 Config
       #color-panel
-        .color(v-repeat="color: colors" v-style="background: color" v-touch="tap: selectColor(color)")
+        color-palette(v-repeat="colors" v-touch="tap: selectColor($value)")
       a.submit(v-touch="tap: show = !show") End
   #nontarget
     p Please hold iPhone with landscape.

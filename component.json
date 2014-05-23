@@ -14,8 +14,11 @@
   "main": "tmp/client/javascripts/main.js",
   "scripts": [
     "tmp/client/javascripts/main.js",
-    "tmp/client/javascripts/client.js",
-    "tmp/client/javascripts/reset.js"
+    "tmp/client/javascripts/app.js",
+    "tmp/client/javascripts/reset.js",
+    "tmp/client/javascripts/components/board.js",
+    "tmp/client/javascripts/components/icon.js",
+    "tmp/client/javascripts/config.js"
   ],
   "paths": [
     "components"
