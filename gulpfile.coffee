@@ -52,7 +52,7 @@ gulp.task "compass", ->
       sass: "src/client/stylesheets"
       css: "tmp/client/stylesheets"
       image: "tmp/client/images"
-      require: ['susy', 'sassy-buttons', 'breakpoint']
+      require: ['susy', 'breakpoint']
     )
     .pipe(gulp.dest("tmp/client/stylesheets"))
     .pipe livereload()

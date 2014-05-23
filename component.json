@@ -9,7 +9,8 @@
     "jashkenas/underscore": "*",
     "visionmedia/superagent": "*",
     "ianstormtaylor/router": "*",
-    "vuejs/vue-touch": "*"
+    "vuejs/vue-touch": "*",
+    "microjs/q": "*"
   },
   "main": "tmp/client/javascripts/main.js",
   "scripts": [

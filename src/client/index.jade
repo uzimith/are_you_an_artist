@@ -9,12 +9,16 @@ block content
     draw-component(v-ref="board")
     icon-component
     a.export.button.button-border(v-touch="tap: exportFire") Export
+    #notify(v-if="notify.show" v-transition) {{notify.message}}
   section#config
     .panel(v-if='show' v-transition)
       h2 Config
+      user-palette
       color-palette
       charactor-palette
+      room-palette
       a.end.button.button-pill.button-flat(v-touch="tap: show = !show") End
   #nontarget
     p Please hold iPhone with landscape.
   include config
+  include components

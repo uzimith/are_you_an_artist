@@ -9,6 +9,9 @@ app = new Vue
   el: "#app"
   data:
     config: config.$data
+    notify:
+      show: false
+      message: ""
   methods:
     move: (e)->
       position =
@@ -25,3 +28,11 @@ socket.on 'draw', (data)->
       app.$.board.drawstart data.point
     when "move"
       app.$.board.draw data.point, data.color
+
+socket.on 'notify', (data)->
+  console.log data
+  app.notify.message = data.message
+  app.notify.show = true
+  setTimeout ->
+    app.notify.show = false
+  , 2000

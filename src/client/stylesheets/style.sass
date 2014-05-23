@@ -56,21 +56,29 @@ html,body,#app
   $height: 31px
   position: absolute
   z-index: 10
-  display: block
-  width: $width
-  height: $height
-  +retina-image("girls-white", "png")
-  background-size: 825px 467px
-  border-radius: 5px
-  border: 1px solid rgba(0,0,0,0.5)
-  +transition(0.5s)
-  +transition-timing-function(ease)
-  &.black
-    +retina-image("girls", "png")
+  .image
+    display: block
+    width: $width
+    height: $height
+    +retina-image("girls-white", "png")
+    background-size: 825px 467px
+    border-radius: 5px
+    border: 1px solid rgba(0,0,0,0.5)
+    &.black
+      +retina-image("girls", "png")
   @for $i from 0 through 9
     @for $j from 0 through 7
-      &.icon#{$i}-#{$j}
-        background-position: $i*$width $j*$height + 4px
+      .icon#{$i}-#{$j}
+        .image
+          background-position: $i*$width $j*$height + 4px
+  .text
+    position: absolute
+    top: 0
+    left: $width - 5px
+    margin-left: 10px
+    text-shadow: 0 0 1px #fff
+  +transition(0.5s)
+  +transition-timing-function(ease)
 
 #board
   +box-centerling(450px, 320px)
@@ -87,6 +95,31 @@ html,body,#app
     position: absolute
     left: 10px
     bottom: 10px
+
+//
+// notify
+//
+#notify
+  $color: #A1C3DD
+  +transition
+  $width: 300px
+  z-index: 100
+  // background: #F8D8E4
+  // background: #EDD2B1
+  background: $color
+  border: 1px solid darken($color, 10%)
+  border-radius: 5px
+  box-shadow: 0 0 1px 0 rgba(0,0,0, 0.3)
+  width: $width
+  height: auto
+  padding: 10px
+  position: absolute
+  left: 50%
+  bottom: 5px
+  margin-left: - $width/2
+  opacity: 1
+  &.v-enter, &.v-leave
+    opacity: 0
 
 //
 // config
