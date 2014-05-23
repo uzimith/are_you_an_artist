@@ -2,9 +2,9 @@
 @import compass/reset
 @import susy
 @import breakpoint
-@import sassy-buttons
 @import subsets/helper
 @import subsets/zurui-sass
+@import subsets/buttons
 
 // breakpoint
 $nontarget: max-width 320px
@@ -16,8 +16,7 @@ $disktop: 570px
 $main-color    : #222
 $seccond-color : #000
 $accent-color  : #000
-
-
+$link-color    : #ddd
 
 [v-cloak]
   display: none
@@ -52,6 +51,7 @@ html,body,#app
 
 
 .icon
+  z-index: 5
   $width: 21px
   $height: 31px
   position: absolute
@@ -82,11 +82,11 @@ html,body,#app
 .export
   display: none
   +breakpoint($disktop)
-    z-index: 2
+    display: block
+    z-index: 10
     position: absolute
-    right: 10px
-    top: 35px
-    +sassy-button("glass", 5px, 14px)
+    left: 10px
+    bottom: 10px
 
 //
 // config
@@ -104,7 +104,6 @@ html,body,#app
     right: 15px
     bottom: 30px
     opacity: 0.8
-    +sassy-button("flat")
   .palette
     margin-bottom: 20px
   #color-palette
@@ -117,6 +116,10 @@ html,body,#app
       float: left
       border: 3px solid #ddd
       border-radius: 3px
+  .end
+    position: absolute
+    bottom: 30px
+    right: 20px
 
 .panel
   background: rgba(0,0,0, 0.5)
@@ -128,6 +131,20 @@ html,body,#app
   padding: 20px 15px
   &.v-enter, &.v-leave
     opacity: 0
+
+//
+// source
+//
+#link
+  display: none
+  +breakpoint($disktop)
+    display: block
+    z-index: 10
+    position: absolute
+    bottom: 5px
+    right: 5px
+    a
+      z-index: 10
 
 //
 // nontarget

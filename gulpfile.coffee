@@ -45,7 +45,7 @@ gulp.task "component", ["coffee"], ->
 # css
 #
 gulp.task "compass", ->
-  gulp.src("src/client/stylesheets/**/*.sass")
+  gulp.src("src/client/stylesheets/style.sass")
     .pipe plumber()
     .pipe compass(
       comments: false

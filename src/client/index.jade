@@ -1,18 +1,20 @@
 extends layout
 
 block content
+  #link
+    a.button.button-border(href="https://github.com/uzimith/are_you_an_artist" target="_blank") Source
   #header
     h1 Are You an Artist
   section#app(v-on="mousemove : move, touchemove : move")
     draw-component(v-ref="board")
     icon-component
-    a.export(v-touch="tap: exportFire") Export
+    a.export.button.button-border(v-touch="tap: exportFire") Export
   section#config
     .panel(v-if='show' v-transition)
       h2 Config
       color-palette
       charactor-palette
-      a.submit(v-touch="tap: show = !show") End
+      a.end.button.button-pill.button-flat(v-touch="tap: show = !show") End
   #nontarget
     p Please hold iPhone with landscape.
   include config
