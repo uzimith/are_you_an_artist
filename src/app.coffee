@@ -1,34 +1,66 @@
-Q = require('q')
+Q = require 'q'
+express = require 'express'
+connect = require 'connect'
+cookieParser = require 'cookie-parser'
+session = require 'express-session'
+RedisStore = require('connect-redis')(session)
+sessionStore = new RedisStore
+  url: process.env.REDISTOGO_URL || "redis://localhost:6379"
+  prefix: 'session:'
 
-express = require('express')
+COOKIE_SECRET = "keyboard cat"
+COOKIE_KEY   = "sid"
 app = express()
+app.use cookieParser()
+app.use session
+  store: sessionStore
+  secret: COOKIE_SECRET
+  name  : COOKIE_KEY
+  # db: 1
 server = require('http').createServer(app)
 io = require('socket.io')(server)
 app.use express.static('client')
 server.listen process.env.PORT || 3000
 
-redis = require('redis-url').connect(process.env.REDISTOGO_URL || "redis://localhost:6379")
+#
+# session share
+#
+io.use (socket, next)->
+  cookie = require('cookie').parse socket.request.headers.cookie
+  cookie = connect.utils.parseSignedCookies cookie, COOKIE_SECRET
+  sessionID = cookie[COOKIE_KEY]
+  sessionStore.get sessionID, (err, session)->
+    if !err and session
+      data =
+        sessionID: sessionID
+        sessionStore: sessionStore
+      Session = require('express-session').Session
+      socket.session = new Session(data, session)
+      next()
+    else
+      next new Error(if err then err.message else "session error")
 
 #
 # app
 #
-io.on 'connection', (client)->
+io.on 'connection', (socket)->
+  session = socket.session
   #
   # connect
   #
-  client.emit "notify", message: client.request.cookie
-  client.emit "notify", message: "connection is established."
+  socket.emit "notify", message: "connection is established."
   #
   # draw
   #
-  client.on 'draw', (data)->
-    io.emit 'draw', data
+  socket.on 'draw', (data)->
+    io.sockets.in(session.room).emit 'draw', data
   #
-  # join
+  # config
   #
-  client.on 'join', (name)->
-    console.log 'join :' + client.id  + " to " + name
-    console.log client.rooms
-    console.log client.client
-    client.join name
-    client.emit "notify", message: "joined " + name
+  socket.on 'join', (data)->
+    session.name = data.name
+    session.room = data.room
+    session.save()
+    console.log 'join :' + session.name  + " to " + session.room
+    socket.join data.room
+    socket.emit "notify", message: session.name + " joined Room:" + session.room

@@ -6,8 +6,11 @@
     "express": "~4.2.0",
     "gulp-jade": "~0.5.0",
     "socket.io": "git://github.com/LearnBoost/socket.io",
-    "redis-url": "~0.2.0",
-    "flow_js": "^1.0.2"
+    "q": "^1.0.1",
+    "cookie-parser": "~1.1.0",
+    "connect": "~2.17.1",
+    "connect-redis": "~2.0.0",
+    "express-session": "~1.2.0"
   },
   "main": "tmp/app.js",
   "devDependencies": {
@@ -35,7 +38,6 @@
     "isarray": "0.0.1",
     "object-keys": "~0.5.1",
     "gulp-component": "^0.1.8",
-    "gulp-nodemon": "^1.0.3",
-    "q": "^1.0.1"
+    "gulp-nodemon": "^1.0.3"
   }
 }

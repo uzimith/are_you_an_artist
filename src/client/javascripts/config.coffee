@@ -46,12 +46,15 @@ Vue.component 'charactor-palette',
     xrange: [0..9]
     y: 0
     yrange: [0..7]
+
 Vue.component 'room-palette',
   template: "#room-palette-template"
   replace: true
   methods:
     join: ->
-      socket.emit 'join', @$root.room
+      socket.emit 'join',
+        name: @$root.name
+        room: @$root.room
 
 module.exports = new Vue
   el: "#config"
