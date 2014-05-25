@@ -26,26 +26,6 @@ Vue.component 'color-palette',
       methods:
         selectColor: (color)->
           @$root.color = color
-        submit: ->
-          console.log @show
-          @show = !@show
-
-Vue.component 'charactor-palette',
-  template: "#charactor-palette-template"
-  replace: true
-  computed:
-    charactor: ->
-      "icon" + @x + "-" + @y
-  created: ->
-    @$watch "x", ->
-      @$root.charactor = @charactor
-    @$watch "y", ->
-      @$root.charactor = @charactor
-  data:
-    x: 0
-    xrange: [0..9]
-    y: 0
-    yrange: [0..7]
 
 Vue.component 'room-palette',
   template: "#room-palette-template"
@@ -55,12 +35,20 @@ Vue.component 'room-palette',
       socket.emit 'join',
         name: @$root.name
         room: @$root.room
+        color: @$root.color
 
 module.exports = new Vue
   el: "#config"
   data:
     show: true
-    name: "name"
+    name: ""
     color: "#000"
-    charactor: "icon1-1"
-    room: "room"
+    room: ""
+  ready: ->
+    @$watch "name", @playerInfomation
+    @$watch "color", @playerInfomation
+  methods:
+    toggle: ->
+      @show = !@show
+    playerInfomation: ->
+      socket.emit 'setting', @$data

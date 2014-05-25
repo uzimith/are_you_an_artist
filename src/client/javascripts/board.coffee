@@ -47,6 +47,7 @@ Vue.component 'draw-component',
     # draw methods
     #
     draw: (point,color)->
+      console.log point
       ctx = @$el.getContext '2d'
       ctx.lineWidth = 6
       ctx.strokeStyle = color

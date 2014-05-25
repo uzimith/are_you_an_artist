@@ -1,9 +1,9 @@
 Vue = require 'vue'
 socket = io.connect("http://" + location.host)
 
-config = require('./config')
-require('./components/board')
-require('./components/icon')
+require './components/board'
+config = require './config'
+player = require './player'
 
 app = new Vue
   el: "#app"
@@ -13,11 +13,6 @@ app = new Vue
       show: false
       message: ""
   methods:
-    move: (e)->
-      position =
-        x: e.pageX
-        y: e.pageY
-      @$broadcast "move", position
     exportFire: ->
       png = @$.board.$el.toDataURL()
       console.log png
@@ -29,8 +24,26 @@ socket.on 'draw', (data)->
     when "move"
       app.$.board.draw data.point, data.color
 
+
+socket.on 'reload', (data)->
+  config.$data.name = data.name
+  config.$data.room = data.room
+  config.$data.color = data.color
+socket.on 'setting', (data)->
+  player.list.$set 0,data.infomation
+socket.on 'update', (data)->
+  console.log data.order
+  switch data.mode
+    when "start"
+      player.list = []
+      socket.emit "update", config.$data
+    when "listing"
+      console.log data.infomation
+      player.list.push data.infomation
+socket.on 'join', (data)->
+  config.toggle()
+  player.room = data.room
 socket.on 'notify', (data)->
-  console.log data
   app.notify.message = data.message
   app.notify.show = true
   setTimeout ->

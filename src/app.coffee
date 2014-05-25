@@ -36,6 +36,7 @@ io.use (socket, next)->
         sessionStore: sessionStore
       Session = require('express-session').Session
       socket.session = new Session(data, session)
+      socket.session.id = sessionID
       next()
     else
       next new Error(if err then err.message else "session error")
@@ -44,23 +45,50 @@ io.use (socket, next)->
 # app
 #
 io.on 'connection', (socket)->
-  session = socket.session
+  socket.session.join = false
+  if socket.session.room
+    socket.emit 'reload', socket.session.data
   #
   # connect
   #
   socket.emit "notify", message: "connection is established."
   #
-  # draw
+  # room
   #
+  socket.on 'room', (data)->
+    if socket.session.room
+      io.sockets.in(socket.session.room).emit 'room', data
+    else
+      socket.emit 'room', data
   socket.on 'draw', (data)->
-    io.sockets.in(session.room).emit 'draw', data
+    console.log socket.session.room
+    io.sockets.in(socket.session.room).emit 'draw', data
+  #
+  # update
+  #
+  socket.on 'update', (data)->
+    io.sockets.in(socket.session.room).emit 'update', mode: "listing", id: socket.id, infomation: data
   #
   # config
   #
+  socket.on 'setting', (data)->
+    socket.emit 'setting', id: 0, infomation: data
   socket.on 'join', (data)->
-    session.name = data.name
-    session.room = data.room
-    session.save()
-    console.log 'join :' + session.name  + " to " + session.room
+    if socket.session.join
+      socket.emit "notify", message: "You already joinned"
+      io.sockets.in(socket.session.room).emit 'update', mode: "start"
+      return
+    # join room
+    console.log 'join ' + data.name  + " to " + data.room
     socket.join data.room
-    socket.emit "notify", message: session.name + " joined Room:" + session.room
+    socket.emit "join", room: data.room
+    socket.emit "notify", message: data.name + " joined Room:" + data.room
+    # update memeber's list
+    console.log Object.keys(io.sockets.in(data.room).connected)
+    # save to socket.session
+    socket.session.join = true
+    socket.session.id = socket.id
+    socket.session.data = data
+    socket.session.room = data.room
+    socket.session.save()
+    io.sockets.in(socket.session.room).emit 'update', mode: "start"

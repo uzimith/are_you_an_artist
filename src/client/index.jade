@@ -5,19 +5,22 @@ block content
     a.button.button-border(href="https://github.com/uzimith/are_you_an_artist" target="_blank") Source
   #header
     h1 Are You an Artist
-  section#app(v-on="mousemove : move, touchemove : move")
+  section#app(v-cloak)
     draw-component(v-ref="board")
-    icon-component
     a.export.button.button-border(v-touch="tap: exportFire") Export
     #notify(v-if="notify.show" v-transition) {{notify.message}}
-  section#config
-    .panel(v-if='show' v-transition)
-      h2 Config
-      user-palette
-      color-palette
-      charactor-palette
-      room-palette
-      a.end.button.button-pill.button-flat(v-touch="tap: show = !show") End
+  section#player
+    h2 Player
+      span.room(v-if="room") {{room}}
+    div#list(v-repeat="list" v-style="border-color: color, background: color")
+      span.number {{order}}
+      span.name {{name}}
+  section#config.panel(v-show='show' v-transition v-cloak)
+    h2 Config
+    user-palette
+    color-palette
+    charactor-palette
+    room-palette
   #nontarget
     p Please hold iPhone with landscape.
   include config

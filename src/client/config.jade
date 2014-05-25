@@ -1,21 +1,13 @@
 script#user-palette-template(type="text/x-template")
   #user-palette.palette
     h3 User
-    input(type="text" v-model="name")
-
+    input(type="text" v-model="name" placeholder="name")
 script#color-palette-template(type="text/x-template")
   #color-palette.palette
     h3 Color
     color-frame(v-repeat="colors" v-touch="tap: selectColor($value)")
-script#charactor-palette-template(type="text/x-template")
-  #charactor-palette.palette
-    h3 Charactor
-    select(v-model="x")
-      option(v-repeat="xrange") {{$value}}
-    select(v-model="y")
-      option(v-repeat="yrange") {{$value}}
 script#room-palette-template(type="text/x-template")
   #room-palette.palette
     h3 Room
-    input(type="text" v-model="room")
-    a.button(v-touch="tap: join") Join
+    input(type="text" v-model="room" placeholder="room" v-on="keyup: join | key enter")
+    a.end.button(v-touch="tap: join") Join

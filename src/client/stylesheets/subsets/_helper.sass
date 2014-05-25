@@ -1,5 +1,7 @@
 @mixin retina-image($name, $ext)
-  background-image: image-url($name + "." + $ext)
+  $path: $name + "." + $ext
+  background-image: image-url($path)
+  background-size: image-width($path) image-height($path)
   +experimental-value(background-image, image-set(image-url($name + "." + $ext) 1x, image-url($name + "@2x." + $ext) 2x))
 
 @mixin box-centerling($width, $height)

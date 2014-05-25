@@ -19,7 +19,8 @@
     "tmp/client/javascripts/reset.js",
     "tmp/client/javascripts/components/board.js",
     "tmp/client/javascripts/components/icon.js",
-    "tmp/client/javascripts/config.js"
+    "tmp/client/javascripts/config.js",
+    "tmp/client/javascripts/player.js"
   ],
   "paths": [
     "components"
