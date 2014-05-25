@@ -4,6 +4,7 @@ socket = io.connect("http://" + location.host)
 require './components/board'
 config = require './config'
 player = require './player'
+theme  = require './theme'
 
 app = new Vue
   el: "#app"
@@ -43,6 +44,7 @@ socket.on 'update', (data)->
 socket.on 'join', (data)->
   config.toggle()
   player.room = data.room
+  theme.show = true
 socket.on 'notify', (data)->
   app.notify.message = data.message
   app.notify.show = true

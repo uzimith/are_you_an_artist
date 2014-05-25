@@ -9,12 +9,28 @@ block content
     draw-component(v-ref="board")
     a.export.button.button-border(v-touch="tap: exportFire") Export
     #notify(v-if="notify.show" v-transition) {{notify.message}}
-  section#player
+  section#player(v-cloak)
     h2 Player
       span.room(v-if="room") {{room}}
-    div#list(v-repeat="list" v-style="border-color: color, background: color")
+    div#list(v-repeat="list | order" v-style="border-color: color, background: color")
       span.number {{order}}
       span.name {{name}}
+  section#theme(v-show="show")
+    #input(v-if=" status == 'input' ")
+      .genre
+        label ジャンル
+        input(v-model="genre")
+      .theme
+        label テーマ
+        input(v-model="theme")
+      a.end.button.button-border(v-touch="tap: submit") Question!
+    #view(v-if=" status == 'view' ")
+      .genre
+        span {{genre}}
+        | に関するもの
+      .theme.theme
+        span 「{{theme}}」
+      a.end.button.button-border-caution(v-touch="tap: back") Back!
   section#config.panel(v-show='show' v-transition v-cloak)
     h2 Config
     user-palette

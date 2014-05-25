@@ -53,16 +53,15 @@ io.on 'connection', (socket)->
   #
   socket.emit "notify", message: "connection is established."
   #
-  # room
+  # draw
   #
-  socket.on 'room', (data)->
-    if socket.session.room
-      io.sockets.in(socket.session.room).emit 'room', data
-    else
-      socket.emit 'room', data
   socket.on 'draw', (data)->
     console.log socket.session.room
     io.sockets.in(socket.session.room).emit 'draw', data
+  #
+  # theme
+  #
+
   #
   # update
   #
