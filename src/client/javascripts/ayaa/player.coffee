@@ -6,3 +6,5 @@ module.exports = new Vue
     update: ()->
       Q.delay(0).done ->
         Socket.instace().emit "player-list"
+    kick: (id)->
+      Socket.instace().emit "kick", id

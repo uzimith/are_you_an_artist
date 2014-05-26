@@ -45,6 +45,17 @@ io.use (socket, next)->
 #
 # dynamic namespace
 #
+
+playerList = (connected, me)->
+  _.chain(connected)
+    .pluck("client")
+    .map (v)->
+      hash = JSON.parse(v.request._query.user)
+      hash['id'] = v.id
+      hash['me'] = (me is v.id)
+      hash
+    .value()
+
 io.use (socket, next)->
   mode = socket.request._query.mode
   namespace = socket.request._query.id
@@ -58,14 +69,13 @@ io.use (socket, next)->
       nsp.on 'connection', (client)->
         client.emit "notify", message: nsp.name + "に接続しました。"
         client.on 'player-list', (profile)->
-          playerList = _.chain(io.of(nsp.name).connected)
-            .pluck("client")
-            .map (v)->
-              hash = JSON.parse(v.request._query.user)
-              hash['id'] = v.id
-              hash
-            .value()
-          io.of(nsp.name).emit 'player-list', playerList
+          list = playerList(io.of(nsp.name).connected, client.id)
+          console.log list
+          io.of(nsp.name).emit 'player-list', list
+        client.on "kick", (id)->
+          io.of(nsp.name).connected[id].disconnect()
+          list = playerList(io.of(nsp.name).connected, client.id)
+          io.of(nsp.name).emit 'player-list', list
         client.on 'draw', (data)->
           io.of(nsp.name).emit 'draw', data
     else

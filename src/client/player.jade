@@ -4,3 +4,4 @@ section#player(v-cloak)
   div#list(v-repeat="list | orderBy order" v-style="border-color: color, background: color")
     span.number {{order}}
     span.name {{name}}
+    a.kick(v-touch="tap: kick(id)" v-if="!me") ✔
