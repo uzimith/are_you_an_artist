@@ -3,5 +3,5 @@ Vue = require 'vue'
 vueTouch = require('vue-touch')
 Vue.use(vueTouch)
 
-require './app'
-require './reset'
+require './socket'
+# require './reset'

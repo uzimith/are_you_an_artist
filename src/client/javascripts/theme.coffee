@@ -1,6 +1,6 @@
 Vue = require 'vue'
-socket = io.connect("http://" + location.host)
 
+socket = require "./socket"
 
 module.exports = new Vue
   el: "#theme"
@@ -11,6 +11,8 @@ module.exports = new Vue
     status: "input"
   methods:
     submit: ->
-      @$root.status = "view"
+      socket.emit "theme", genre: @$root.genre, theme: @$root.theme
     back: ->
-      @$root.status= "input"
+      @$root.status = "input"
+    start: ->
+      socket.emit 'start'

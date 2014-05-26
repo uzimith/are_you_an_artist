@@ -1,5 +1,5 @@
 Vue = require 'vue'
-socket = io.connect("http://" + location.host)
+socket = require "./socket"
 
 prevImage = null
 

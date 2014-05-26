@@ -1,5 +1,4 @@
 Vue = require 'vue'
-socket = io.connect("http://" + location.host)
 
 Vue.component 'user-palette',
   template: "#user-palette-template"
@@ -30,12 +29,6 @@ Vue.component 'color-palette',
 Vue.component 'room-palette',
   template: "#room-palette-template"
   replace: true
-  methods:
-    join: ->
-      socket.emit 'join',
-        name: @$root.name
-        room: @$root.room
-        color: @$root.color
 
 module.exports = new Vue
   el: "#config"
@@ -43,12 +36,26 @@ module.exports = new Vue
     show: true
     name: ""
     color: "#000"
+    order: "-"
     room: ""
   ready: ->
-    @$watch "name", @playerInfomation
-    @$watch "color", @playerInfomation
+    @$watch "name", @setting
+    @$watch "color", @setting
   methods:
     toggle: ->
       @show = !@show
+    setting: ->
+      player.list.$set 0, @playerInfomation()
     playerInfomation: ->
-      socket.emit 'setting', @$data
+      {
+        name: @$root.name
+        room: @$root.room
+        color: @$root.color
+      }
+    make: ->
+      # socket = io.connect "http://" + location.host
+      # Socket.namespace = @$root.room
+      Socket.namespace = "test"
+      Socket.init()
+      Socket.instace().emit 'make'
+      # console.log Socket.instace()

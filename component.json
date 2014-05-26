@@ -21,7 +21,8 @@
     "tmp/client/javascripts/components/icon.js",
     "tmp/client/javascripts/config.js",
     "tmp/client/javascripts/player.js",
-    "tmp/client/javascripts/theme.js"
+    "tmp/client/javascripts/theme.js",
+    "tmp/client/javascripts/socket.js"
   ],
   "paths": [
     "components"
