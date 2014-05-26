@@ -1,4 +1,5 @@
 Q = require 'q'
+_ = require 'underscore'
 express = require 'express'
 connect = require 'connect'
 cookieParser = require 'cookie-parser'
@@ -54,9 +55,18 @@ io.use (socket, next)->
     unless io.nsps.hasOwnProperty("/"+namespace)
       console.log "make-room:" + namespace
       nsp = io.of("/" + namespace)
-      nsp.on 'connection', (socket)->
-        socket.emit "notify", message: nsp.name + "に接続しました。"
-        socket.on 'draw', (data)->
+      nsp.on 'connection', (client)->
+        client.emit "notify", message: nsp.name + "に接続しました。"
+        client.on 'player-list', (profile)->
+          playerList = _.chain(io.of(nsp.name).connected)
+            .pluck("client")
+            .map (v)->
+              hash = JSON.parse(v.request._query.user)
+              hash['id'] = v.id
+              hash
+            .value()
+          io.of(nsp.name).emit 'player-list', playerList
+        client.on 'draw', (data)->
           io.of(nsp.name).emit 'draw', data
     else
       if mode is "confirm"

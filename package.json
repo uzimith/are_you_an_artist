@@ -10,7 +10,8 @@
     "connect": "~2.17.1",
     "connect-redis": "~2.0.0",
     "express-session": "~1.2.0",
-    "cookie": "~0.1.2"
+    "cookie": "~0.1.2",
+    "underscore": "~1.6.0"
   },
   "main": "tmp/app.js",
   "devDependencies": {

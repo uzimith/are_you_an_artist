@@ -1,5 +1,7 @@
 require './reset'
 
+window.Q = require 'q'
+
 # Vue
 window.Vue = require 'vue'
 vueTouch = require('vue-touch')

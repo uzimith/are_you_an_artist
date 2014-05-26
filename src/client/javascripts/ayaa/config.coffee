@@ -55,9 +55,11 @@ module.exports = new Vue
       Socket.namespace = @room
       Socket.confirm()
       Socket.init()
+      Player.update()
       @toggle()
     join: ->
       Socket.namespace = @room
       Socket.init()
+      Player.update()
       @toggle()
 

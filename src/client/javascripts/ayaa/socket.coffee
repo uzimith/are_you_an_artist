@@ -8,7 +8,7 @@ module.exports = class Socket
       return @cache
     if @namespace
       @cache = io.connect @url + "/" + @namespace,
-        query: "mode=" + mode + "&id=" + @namespace
+        query: "user=" + JSON.stringify(Config.user) + "&id=" + @namespace
         'forceNew' : true
     else
       App.notifyMessage("ルーム名を指定してください。")
@@ -32,5 +32,9 @@ module.exports = class Socket
             Board.drawstart data.position
           when "move"
             Board.draw data.position, data.color
+      socket.on 'player-list', (data)->
+        console.log data
+        Player.list = data
+
     else
       App.notifyMessage("すでに接続されています。")
