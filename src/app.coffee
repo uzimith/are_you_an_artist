@@ -8,7 +8,7 @@ sessionStore = new RedisStore
   url: process.env.REDISTOGO_URL || "redis://localhost:6379"
   prefix: 'session:'
 
-COOKIE_SECRET = "keyboard cat"
+COOKIE_SECRET = process.env.SECRET || "keyboard cat"
 COOKIE_KEY   = "sid"
 app = express()
 app.use cookieParser()
@@ -45,15 +45,19 @@ io.use (socket, next)->
 # dynamic namespace
 #
 io.use (socket, next)->
+  mode = socket.request._query.mode
   namespace = socket.request._query.id
   if namespace
     socket.session.namespace = namespace
     socket.session.save()
+    # make room
     unless io.nsps.hasOwnProperty("/"+namespace)
-      console.log Object.keys(io.of(namespace).connected)
+      console.log "make-room:" + namespace
       nsp = io.of("/" + namespace)
       nsp.on 'connection', (socket)->
-        socket.on 'make', (data)->
-          console.log Object.keys(io.of(nsp.name).connected)
-          socket.emit "notify", message: "接続しました。"
+        socket.emit "notify", message: nsp.name + "に接続しました。"
+    else
+      if mode is "confirm"
+        Q.delay(1000).done ->
+          io.of("/"+ namespace).emit "exist"
   next()

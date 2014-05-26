@@ -28,6 +28,8 @@ Temporary Items
 components
 .sass-cache
 tmp/*.js
+tmp/*.rdb
+*_old
 tmp/client/build
 tmp/client/javascripts
 tmp/client/stylesheets

@@ -5,51 +5,44 @@
 @import subsets/zurui-sass
 @import subsets/buttons
 
+*
+  box-sizing: border-box
+
+[v-cloak]
+  display: none
+
 // breakpoint
 $nontarget: max-width 320px
 $disktop: 570px
-
-*
-  box-sizing: border-box
 
 $main-color    : #222
 $seccond-color : #000
 $accent-color  : #000
 $link-color    : #ddd
 
-[v-cloak]
-  display: none
-
-html,body,#app
+html,body
   width: 100%
   height: 100%
   background-image: image-url("food.png")
   font-family: Helvetica
   +user-select(none)
 
-
-#app
-  position: relative
-
 @import header
-@import board
-@import config
-@import player
-@import theme
-@import notify
+@import ayaa/board
+@import ayaa/config
+@import ayaa/player
+@import ayaa/theme
+@import ayaa/notify
 
-//
-// export
-//
-
-.export
-  display: none
-  +breakpoint($disktop)
-    display: block
-    z-index: 10
-    position: absolute
-    left: 10px
-    bottom: 10px
+.panel
+  background: rgba(0,0,0, 0.5)
+  z-index: 10
+  border-radius: 5px
+  +transition
+  opacity: 0.8
+  padding: 20px 15px
+  &.v-enter, &.v-leave
+    opacity: 0
 
 //
 // source

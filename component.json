@@ -6,23 +6,20 @@
   "keywords": [],
   "dependencies": {
     "yyx990803/vue": "*",
-    "jashkenas/underscore": "*",
     "visionmedia/superagent": "*",
     "ianstormtaylor/router": "*",
     "vuejs/vue-touch": "*",
-    "microjs/q": "*"
+    "microjs/q": "*",
+    "components/underscore": "*"
   },
   "main": "tmp/client/javascripts/main.js",
   "scripts": [
     "tmp/client/javascripts/main.js",
-    "tmp/client/javascripts/app.js",
     "tmp/client/javascripts/reset.js",
-    "tmp/client/javascripts/components/board.js",
-    "tmp/client/javascripts/components/icon.js",
-    "tmp/client/javascripts/config.js",
-    "tmp/client/javascripts/player.js",
-    "tmp/client/javascripts/theme.js",
-    "tmp/client/javascripts/socket.js"
+    "tmp/client/javascripts/ayaa/app.js",
+    "tmp/client/javascripts/ayaa/config.js",
+    "tmp/client/javascripts/ayaa/player.js",
+    "tmp/client/javascripts/ayaa/socket.js"
   ],
   "paths": [
     "components"

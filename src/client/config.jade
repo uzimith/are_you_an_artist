@@ -1,0 +1,30 @@
+section#config.panel(v-cloak v-show="show" v-transition)
+  label(for="room-input").button Room
+  label(for="join-input").button Join
+  input#room-input(type="radio" name="config_panel" value="room" v-model="panel")
+  input#join-input(type="radio" name="config_panel" value="join" v-model="panel")
+  #slides
+    .inner
+      #room
+        h2 Room
+        input(type="text" v-model="room" placeholder="room" v-on="keyup: make | key enter")
+        a.button(v-touch="tap: make") Make
+        #user-profile
+          user-palette
+          color-palette
+      #join
+        h2 Join
+        input(type="text" v-model="room" placeholder="room" v-on="keyup: join | key enter")
+        a.button(v-touch="tap: join") Join
+        #user-profile
+          user-palette
+          color-palette
+
+script#user-palette-template(type="text/x-template")
+  #user-palette
+    h3 User
+    input(type="text" v-model="user.name" placeholder="name")
+script#color-palette-template(type="text/x-template")
+  #color-palette
+    h3 Color
+    color-frame(v-repeat="colors" v-touch="tap: selectColor($value)")

@@ -1,0 +1,6 @@
+section#player(v-cloak)
+  h2 Player
+    span.room(v-if="room") {{room}}
+  div#list(v-repeat="list | orderBy order" v-style="border-color: color, background: color")
+    span.number {{order}}
+    span.name {{name}}

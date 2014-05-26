@@ -1,0 +1,40 @@
+//
+// config
+//
+#config
+  +box-centerling(480px, 340px)
+  padding: 30px
+  // slides
+  #slides
+    width: 100%
+    margin-top: 10px
+    overflow: hidden
+  .inner
+    width: 200%
+    +transition
+  #room, #join
+    width: 50%
+    float: left
+  #room-input, #join-input
+    display: none
+  #room-input:checked ~ #slides .inner
+    margin-left: 0
+  #join-input:checked ~ #slides .inner
+    margin-left: -100%
+  // content
+  h2
+    font-size: 120%
+    color: #000
+    text-shadow: 1px 1px 0 rgba(255,255,255, 0.2)
+    margin-bottom: 15px
+  #color-palette
+    +clearfix
+    .color
+      margin: 0 5px
+      display: block
+      width: 30px
+      height: 30px
+      float: left
+      border: 3px solid #ddd
+      border-radius: 3px
+
