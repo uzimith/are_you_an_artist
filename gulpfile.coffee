@@ -16,7 +16,7 @@ plumber = require("gulp-plumber")
 #
 gulp.task "template", ->
   gulp.src [
-    "src/client/*.jade"
+    "src/client/index.jade"
     "!src/client/layout.jade"
   ]
   .pipe plumber()
