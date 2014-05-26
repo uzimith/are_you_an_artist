@@ -39,6 +39,8 @@ module.exports = new Vue
       Player.list.$set 0, user
     if location.hash
       @room = location.hash.substring 1
+      @panel = "join"
+    if location.search
       @user = _.chain location.search.substring(1).split("&")
         .map (v)-> v.split("=")
         .reduce (hash,value)-> 
@@ -46,7 +48,6 @@ module.exports = new Vue
           hash
         , {}
         .value()
-      @panel = "join"
   methods:
     toggle: ->
       @show = !@show

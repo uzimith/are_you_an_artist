@@ -8,7 +8,7 @@ module.exports = class Socket
       return @cache
     if @namespace
       @cache = io.connect @url + "/" + @namespace,
-        query: "user=" + JSON.stringify(Config.user) + "&id=" + @namespace
+        query: "mode=" + mode + "&user=" + JSON.stringify(Config.user) + "&id=" + @namespace
         'forceNew' : true
     else
       App.notifyMessage("ルーム名を指定してください。")
@@ -20,6 +20,7 @@ module.exports = class Socket
       Socket.cache = null
       Socket.initialized = false
       location.hash = ""
+      Player.list = [Config.user]
       Config.toggle()
   @init: ->
     unless @initialized
