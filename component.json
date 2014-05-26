@@ -17,6 +17,7 @@
     "tmp/client/javascripts/main.js",
     "tmp/client/javascripts/reset.js",
     "tmp/client/javascripts/ayaa/app.js",
+    "tmp/client/javascripts/ayaa/board.js",
     "tmp/client/javascripts/ayaa/config.js",
     "tmp/client/javascripts/ayaa/player.js",
     "tmp/client/javascripts/ayaa/socket.js"

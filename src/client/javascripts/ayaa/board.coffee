@@ -1,5 +1,5 @@
 module.exports = new Vue
-  template: "#board canvas"
+  el: "#board"
   data:
     drawing: false
     prev:
@@ -9,10 +9,10 @@ module.exports = new Vue
     # event methods
     down: (e)->
       @drawing = true
-      Socket.instace().emit "draw", {mode: "down", point: @point(e), color: @$parent.color}
+      Socket.instace().emit "draw", {mode: "down", position: @position(e), color: Config.user.color}
     move: (e)->
       if @drawing
-        Socket.instace().emit "draw", {mode: "move", point: @point(e), color: @$parent.color}
+        Socket.instace().emit "draw", {mode: "move", position: @position(e), color: Config.user.color}
     up: (e)->
       @drawing = false
       Socket.instace().emit "draw", mode: "up"

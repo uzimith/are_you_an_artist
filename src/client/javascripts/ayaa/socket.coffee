@@ -25,13 +25,12 @@ module.exports = class Socket
     unless @initialized
       socket = Socket.instace()
       socket.on 'notify', (data)->
-        console.log data
         App.notifyMessage(data.message)
       socket.on 'draw', (data)->
         switch data.mode
           when "down"
-            board.drawstart data.position
+            Board.drawstart data.position
           when "move"
-            board.draw data.position, data.color
+            Board.draw data.position, data.color
     else
       App.notifyMessage("すでに接続されています。")

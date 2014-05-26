@@ -56,6 +56,8 @@ io.use (socket, next)->
       nsp = io.of("/" + namespace)
       nsp.on 'connection', (socket)->
         socket.emit "notify", message: nsp.name + "に接続しました。"
+        socket.on 'draw', (data)->
+          io.of(nsp.name).emit 'draw', data
     else
       if mode is "confirm"
         Q.delay(1000).done ->
