@@ -1,9 +1,10 @@
 module.exports = new Vue
   el: "#theme"
   data:
+    show: false
     status: 'input'
-    genre: "果物"
-    theme: "りんご"
+    genre: ""
+    theme: ""
   methods:
     submit: ->
       Socket.instace().emit "theme",

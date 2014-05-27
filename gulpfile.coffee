@@ -17,7 +17,6 @@ plumber = require("gulp-plumber")
 gulp.task "template", ->
   gulp.src [
     "src/client/index.jade"
-    "!src/client/layout.jade"
   ]
   .pipe plumber()
   .pipe jade pretty: true
@@ -82,6 +81,8 @@ gulp.task "copy", ->
   gulp.src(["tmp/client/build/**"])
     .pipe uglify()
     .pipe gulp.dest("build/client/build/")
+  gulp.src("tmp/vendor/**")
+    .pipe gulp.dest("build/vendor/")
 
 #
 # server

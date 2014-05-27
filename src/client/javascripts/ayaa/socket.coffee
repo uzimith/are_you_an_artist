@@ -44,5 +44,6 @@ module.exports = class Socket
         Theme.theme = data.theme
         Theme.genre = data.genre
         Theme.status = "view"
+      Theme.show = true
     else
       App.notifyMessage("すでに接続されています。")

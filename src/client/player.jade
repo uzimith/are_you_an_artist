@@ -1,7 +1,9 @@
+input#player-input(type="checkbox")
+label#player-button(for="player-input").icon.fa.fa-users
 section#player(v-cloak)
   h2 Player
     span.room(v-if="room") {{room}}
   div#list(v-repeat="list | orderBy 'order'" v-style="border-color: color, background: color")
     span.number {{order}}
     span.name {{name}}
-    a.kick(v-touch="tap: kick(id)" v-if="!me(id)") ✔
+    a.kick(v-touch="tap: kick(id)" v-if="!me(id)").fa.fa-minus-circle
