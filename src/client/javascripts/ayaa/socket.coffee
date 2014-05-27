@@ -27,6 +27,8 @@ module.exports = class Socket
       socket = Socket.instace()
       socket.on 'notify', (data)->
         App.notifyMessage(data.message)
+        if data.id
+          Config.id = data.id
       socket.on 'draw', (data)->
         switch data.mode
           when "down"
@@ -36,6 +38,11 @@ module.exports = class Socket
       socket.on 'player-list', (data)->
         console.log data
         Player.list = data
-
+        Board.clear()
+      socket.on 'theme', (data)->
+        console.log data
+        Theme.theme = data.theme
+        Theme.genre = data.genre
+        Theme.status = "view"
     else
       App.notifyMessage("すでに接続されています。")

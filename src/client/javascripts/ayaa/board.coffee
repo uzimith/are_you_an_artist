@@ -34,3 +34,6 @@ module.exports = new Vue
       @prev = position
     drawstart: (position)->
       @prev = position
+    clear: ->
+      ctx = @$el.getContext '2d'
+      ctx.clearRect(0,0,900,640)

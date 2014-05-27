@@ -29,6 +29,7 @@ module.exports = new Vue
   data:
     show: true
     room: ""
+    id: ""
     user:
       name: ""
       color: "#000"

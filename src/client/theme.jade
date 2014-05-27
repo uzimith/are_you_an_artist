@@ -1,4 +1,4 @@
-section#thme(v-cloak)
+section#theme(v-cloak)
   #input(v-if=" status == 'input' ")
     .genre
       label ジャンル
@@ -6,7 +6,7 @@ section#thme(v-cloak)
     .theme
       label テーマ
       input(v-model="theme")
-    a.button.button-border(v-touch="tap: submit") Question!
+    a.button.button-border-caution(v-touch="tap: submit") Question!
   #view(v-if=" status == 'view' ")
     .genre
       span {{genre}}
@@ -14,4 +14,3 @@ section#thme(v-cloak)
     .theme.theme
       span 「{{theme}}」
     a.button.button-border-caution(v-touch="tap: back") Back!
-    a.button.button-border(v-touch="tap: start") Start

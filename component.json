@@ -20,6 +20,7 @@
     "tmp/client/javascripts/ayaa/board.js",
     "tmp/client/javascripts/ayaa/config.js",
     "tmp/client/javascripts/ayaa/player.js",
+    "tmp/client/javascripts/ayaa/theme.js",
     "tmp/client/javascripts/ayaa/socket.js"
   ],
   "paths": [
