@@ -7,12 +7,26 @@ Vue.component 'color-palette',
   replace: true
   data:
     colors: [
+      "#6D8301"
+      "#A09B08"
+      "#75C007"
+      "#B77417"
+      "#0E4744"
+      "#278996"
+      "#30C3A6"
       "#6499fa"
-      "#fa7a64"
-      "#fac564"
-      "#e4fa64"
+      "#0F3675"
+      "#D1B231"
+      "#4BA35D"
+      "#7B736E"
+      "#C87E84"
+      "#C94C5C"
       "#fa6499"
-      "#64fac5"
+      "#BC2F36"
+      "#622A52"
+      "#4D5A58"
+      "#20AA30"
+      "#275B41"
     ]
   components:
     'color-frame':
