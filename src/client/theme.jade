@@ -1,6 +1,6 @@
 input#theme-input(type="checkbox")
-label#theme-button(for="theme-input").icon.fa.fa-bullseye
-section#theme(v-cloak v-show="show" v-transition)
+label#theme-button(for="theme-input").icon.fa.fa-question-circle
+section#theme(v-cloak)
   #input(v-if=" status == 'input' ")
     .genre
       label ジャンル
@@ -8,7 +8,7 @@ section#theme(v-cloak v-show="show" v-transition)
     .theme
       label テーマ
       input(v-model="theme" placeholder="りんご")
-    a.button.button-border-caution(v-touch="tap: submit") Question!
+    a.button.button-border(v-touch="tap: submit") Question!
   #view(v-if=" status == 'view' ")
     .genre
       span {{genre}}
