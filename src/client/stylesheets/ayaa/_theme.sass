@@ -2,6 +2,7 @@
   display: none
   &:checked ~ #theme
     opacity: 1
+    visibility: visible
 #theme-button
   display: block
   +breakpoint($disktop)
@@ -16,8 +17,10 @@
 #theme
   +transition
   opacity: 0
+  visibility: hidden
   +breakpoint($disktop)
     opacity: 1
+    visibility: visible
   z-index: 20
   width: 450px
   height: 90px

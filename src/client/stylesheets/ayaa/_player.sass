@@ -2,6 +2,7 @@
   display: none
   &:checked ~ #player
     opacity: 1
+    visibility: visible
 #player-button
   display: block
   +breakpoint($disktop)
@@ -15,9 +16,11 @@
   border-radius: 5px
 #player
   +transition
+  visibility: hidden
   opacity: 0
   +breakpoint($disktop)
     opacity: 1
+    visibility: visible
   z-index: 20
   position: absolute
   top: 5px
